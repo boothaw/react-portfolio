@@ -1,8 +1,9 @@
 # Your First Headless WordPress Project with ACF and WPGraphQL
 
-This starter project is a basic React SPA using React Router that consumes data from your WordPress WPGraphQL API. This repo is a teaching tool for the WP Engine Developer Relations team, or anyone interested in teaching or learning more about headless WordPress patterns.  
+This starter project is a basic React SPA using React Router that consumes data from your WordPress WPGraphQL API. This repo is a teaching tool for the WP Engine Developer Relations team, or anyone interested in teaching or learning more about headless WordPress patterns.
 
 This project assumes that you have the following requirements met:
+
 - A WordPress site (Check out [Local](https://localwp.com/) to create a local WP site)
 - [WPGraphQL](https://www.wpgraphql.com/) Plugin
 - [Advanced Custom Fields](https://www.advancedcustomfields.com/) and [WPGraphQL for ACF](https://www.wpgraphql.com/acf)(optional)
@@ -12,20 +13,22 @@ The `main` branch of this project is considered the complete version, but since 
 
 This tutorial is heavily based on this [crash course on getting started with React and headless WP](https://developers.wpengine.com/blog/build-a-simple-headless-wordpress-app-with-react-wpgraphql).
 
-To get started, do one of the following: 
+To get started, do one of the following:
+
 - Open [the CodeSandbox for this workshop](https://codesandbox.io/s/first-headless-wordpress-project-acf-wpgraphql-xr5ebt). It's a good idea to create a fork of this project so you can come back to the starting point if needed.
 - Fork this repository or clone locally using `git clone https://github.com/JEverhart383/first-headless-project.git`
 
 For this workshop, you can use the following endpoints:
+
 - REST API Base URL: https://acfheadless.wpengine.com/wp-json/wp/v2/posts
 - WPGraphQL URL: https://acfheadless.wpengine.com/graphql
 - WPGraphQL Backup URL: https://api.headlesswp.info/graphql
 
 Please be a good community member and treat these resource nicely so that everyone can learn 🥳
 
-
 ## Step 0: Starting Point
-You can access the starting point for this tutorial through the `waypoint/start` branch by running `git checkout waypoint/start` in your terminal. At this point, all of our application's data is being sourced from the `dummy-data` directory. 
+
+You can access the starting point for this tutorial through the `waypoint/start` branch by running `git checkout waypoint/start` in your terminal. At this point, all of our application's data is being sourced from the `dummy-data` directory.
 
 ## Step 1: Adding Apollo for Data Fetching
 
@@ -74,7 +77,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route path="/blog/:slug" component={PostPage} />
+        <Route path="/work/:slug" component={PostPage} />
       </Switch>
     </ApolloProvider>
   );
@@ -173,7 +176,7 @@ const GET_POST_BY_SLUG = gql`
         }
       }
       postResources{
-        blogPosts
+        workPosts
         	{
             title
             url
@@ -214,8 +217,6 @@ export default function PostPage(props) {
 
 ```
 
-
-
 ## Step 4: Show ACF Fields in Post Page Content
 
 You can access this waypoint by running `git checkout waypoint/step-four` in your terminal.
@@ -231,7 +232,7 @@ const formatDate = (date) => new Date(date).toLocaleDateString();
 export default function PostPageContent({ post }) {
   const { date, title, content, author, categories, postResources } = post;
   const haveCategories = Boolean(categories?.nodes?.length);
-  const haveResourcePosts = Boolean(postResources?.blogPosts?.length)
+  const haveResourcePosts = Boolean(postResources?.workPosts?.length)
   const haveResourceVideos = Boolean(postResources?.videos?.length)
 
   return (
@@ -251,14 +252,14 @@ export default function PostPageContent({ post }) {
         <div className="categories-list">
           <h2>Post Resources</h2>
           <ul>
-            { haveResourcePosts ? (postResources.blogPosts.map((post)=>{
-              return ( 
+            { haveResourcePosts ? (postResources.workPosts.map((post)=>{
+              return (
                <li>📄 <a href={post.url} key={post.title}>{post.title}</a></li>
                )
             })) : null }
 
             { haveResourceVideos ? (postResources.videos.map((video)=>{
-              return ( 
+              return (
                <li>🎥 <a href={video.url} key={video.title}>{video.title}</a></li>
                )
             })) : null }
@@ -285,15 +286,16 @@ export default function PostPageContent({ post }) {
 }
 
 ```
+
 ## Deploy
 
 You can access this waypoint by running `git checkout deploy` in your terminal.
 
-[Atlas](https://wpengine.com/atlas/) is WP Engine's headless WordPress hosting platform, where an app consists of a WordPress install and a Node.js hosting container, powered by modern JAMstack developer workflows. 
+[Atlas](https://wpengine.com/atlas/) is WP Engine's headless WordPress hosting platform, where an app consists of a WordPress install and a Node.js hosting container, powered by modern JAMstack developer workflows.
 
 You can sign up for an [Atlas Sandbox Account](https://my.wpengine.com/signup?plan=headless-eval) to deploy your app. The sign up process asks for a credit card, but this does not get charged. It's only for fraud prevention purposes.
 
-This branch is ready to be deployed. To serve our React SPA in a node container we installed the `express` package, and modified the `npm run start` command to run `node server.js`, which should start our express server. 
+This branch is ready to be deployed. To serve our React SPA in a node container we installed the `express` package, and modified the `npm run start` command to run `node server.js`, which should start our express server.
 
 ```
 
@@ -314,6 +316,7 @@ app.listen(8080);
 Ideally, you would swap out the URL here to the WPGraphQL endpoint you create. You can follow our [getting started guide on deploying from your own repository](https://developers.wpengine.com/docs/atlas/getting-started/deploy-from-existing-repo).
 
 ## Want to Learn More?
+
 To get more content from the WP Engine developer relations team, you can [read tutorials on our website](https://developers.wpengine.com/) or [watch on our YouTube channel](https://www.youtube.com/channel/UCh1WuL54XFb9ZI6m6goFv1g). Our [Headless WordPress Developer Roadmap](https://developers.wpengine.com/roadmap) builds on the concepts you learned here today and fills in some background on a few key technologies like React and GraphQL.
 
 If you're on Discord, join the 700+ developers in [the headless WordPress Discord community](https://developers.wpengine.com/discord). This is a great place to ask questions, and stay updated on community events like this one.

@@ -11,9 +11,9 @@ export default function App() {
   return (
     <ApolloProvider client={client}>
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/blog/:slug" component={PostPage} />
+        <Route exact path='/' component={HomePage} />
+        <Route path='/work/:slug' component={PostPage} />
       </Switch>
     </ApolloProvider>
   );
- }
+}

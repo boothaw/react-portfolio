@@ -27,21 +27,23 @@ const GET_ALL_POSTS = gql`
 `;
 
 export default function PostsList() {
- const { loading, error, data } = useQuery(GET_ALL_POSTS);
+  const { loading, error, data } = useQuery(GET_ALL_POSTS);
 
- if (loading) return <p>Loading posts…</p>;
- if (error) return <p>Error :(</p>;
+  console.log("list", data);
 
- const postsFound = Boolean(data?.posts.nodes.length);
- if (!postsFound) {
-   return <p>No matching posts found.</p>;
- }
+  if (loading) return <p>Loading posts…</p>;
+  if (error) return <p>Error :(</p>;
 
- return (
-   <div className="posts-list">
-     {data.posts.nodes.map((post) => (
-       <PostCard key={post.databaseId} post={post} />
-     ))}
-   </div>
- );
+  const postsFound = Boolean(data?.posts.nodes.length);
+  if (!postsFound) {
+    return <p>No matching posts found.</p>;
+  }
+
+  return (
+    <div className='posts-list'>
+      {data.posts.nodes.map((post) => (
+        <PostCard key={post.databaseId} post={post} />
+      ))}
+    </div>
+  );
 }
