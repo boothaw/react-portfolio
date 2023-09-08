@@ -6,7 +6,7 @@ const formatDate = (date) => new Date(date).toLocaleDateString();
 export default function PostPageContent({ post }) {
   const { date, title, content, author, categories, postResources } = post;
   const haveCategories = Boolean(categories?.nodes?.length);
-  const haveResourcePosts = Boolean(postResources?.blogPosts?.length);
+  const haveResourcePosts = Boolean(postResources?.workPosts?.length);
   const haveResourceVideos = Boolean(postResources?.videos?.length);
 
   return (
@@ -27,7 +27,7 @@ export default function PostPageContent({ post }) {
           <h2>Post Resources</h2>
           <ul>
             {haveResourcePosts
-              ? postResources.blogPosts.map((post) => {
+              ? postResources.workPosts.map((post) => {
                   return (
                     <li>
                       📄{" "}
