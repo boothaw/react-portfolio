@@ -1,3 +1,7 @@
+**Copied from JEverhart383**
+
+
+
 # Your First Headless WordPress Project with ACF and WPGraphQL
 
 This starter project is a basic React SPA using React Router that consumes data from your WordPress WPGraphQL API. This repo is a teaching tool for the WP Engine Developer Relations team, or anyone interested in teaching or learning more about headless WordPress patterns.
