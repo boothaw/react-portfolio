@@ -20,6 +20,17 @@ const GET_POST_BY_SLUG = gql`
           name
         }
       }
+      postResources{
+        blogPosts
+        	{
+            title
+            url
+          }
+        videos {
+          title
+          url
+        }
+      }
     }
   }
 `;
